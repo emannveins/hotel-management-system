@@ -1,0 +1,60 @@
+obbiettivo generale
+
+realizzare un sistema backend REST per la gestione di un hotel rinomato con possibile frontend
+Il sistema permette di amministrare camere, clienti e prenotazioni, verificando la disponibilità delle camere.
+
+obbiettivi del progetto entro mercoledi (provvisoria):
+
+1. Gestire i clienti: registrare clienti, visualizzarli e cercarli.
+2. Gestire le camere: inserire camere, specificare tipologia, prezzo e stato.
+3. Gestire le prenotazioni: creare, visualizzare, modificare e cancellare prenotazioni.
+4. Controllare la disponibilità: verificare quali camere sono libere in un determinato periodo.
+5. Calcolare i prezzi: calcolare automaticamente il costo del soggiorno in base alle notti.
+6. Gestire check-in e check-out: registrare l'arrivo e la partenza degli ospiti.
+
+
+divisione dei compiti (provvisoria)
+
+layer API
+marco
+
+- dto.
+- Controller.
+- Endpoint REST.
+- Response HTTP.
+
+logica di business
+emanuele
+
+- Service.
+- Regole di business.
+- Controllo disponibilità.
+- Calcolo prezzi.
+
+parte database 
+mariano
+
+- Entity.
+- Enum.
+- Repository.
+- Relazioni JPA.
+
+
+testing e revisione finale 
+coworking emanuele , marco , mariano entro mercoledi mattina
+
+- Test.
+- Bug fixing.
+- Documentazione.
+- Correzioni emerse dall'integrazione.
+
+
+possibile frontend
+
+
+CODE RULES
+
+metodi = camelCase
+variabili = camelCase
+classi = PascalCase
+costanti = UPPER_SNAKE_CASE
