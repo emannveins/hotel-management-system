@@ -1,5 +1,5 @@
 
-package com.hotelmanagement.service;
+package com.hotelmanagement.Service;
 
 import com.hotelmanagement.dto.room.CreateRoomRequest;
 import com.hotelmanagement.dto.room.RoomResponse;

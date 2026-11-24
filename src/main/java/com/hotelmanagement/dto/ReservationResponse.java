@@ -1,7 +1,7 @@
-package com.hotelmanagement.dto.reservation;
+package com.hotelmanagement.dto;
 
-import java.time.LocalDate;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record ReservationResponse(
     Long id,

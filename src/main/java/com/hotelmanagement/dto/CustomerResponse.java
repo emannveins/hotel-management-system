@@ -1,4 +1,4 @@
-package com.hotelmanagement.dto.customer;
+package com.hotelmanagement.dto;
 
 public record CustomerResponse(
     Long id,

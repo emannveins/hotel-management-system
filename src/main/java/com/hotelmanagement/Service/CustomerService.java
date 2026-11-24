@@ -1,9 +1,11 @@
 
-package com.hotelmanagement.hotel_management_system.service;
+package com.hotelmanagement.Service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.hotelmanagement.repository.CustomerRepository;
 
 import java.util.List;
 

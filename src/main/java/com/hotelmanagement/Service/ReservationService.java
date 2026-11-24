@@ -1,4 +1,4 @@
-package com.hotelmanagement.hotel_management_system.Service;
+package com.hotelmanagement.Service;
 
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
