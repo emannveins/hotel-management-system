@@ -11,4 +11,25 @@ public record CreateReservationRequest(
     @NotNull LocalDate checkIn,
     @NotNull LocalDate checkOut,
     @Min(1) int guests
-) {}
+) {
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public Long getRoomId() {
+        return roomId;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
+    public int getGuests() {
+        return guests;
+    }
+}

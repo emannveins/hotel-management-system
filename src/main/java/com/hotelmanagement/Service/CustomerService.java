@@ -1,13 +1,16 @@
 
 package com.hotelmanagement.Service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.hotelmanagement.dto.CreateCustomerRequest;
+import com.hotelmanagement.dto.CustomerResponse;
+import com.hotelmanagement.entity.CustomerEntity;
 import com.hotelmanagement.repository.CustomerRepository;
-
-import java.util.List;
 
 @Service
 public class CustomerService {
@@ -18,7 +21,7 @@ public class CustomerService {
     }
 
     // creating user
-    public CustomerResponse createCustomer( CreateCustomerRequest request) {
+    public CustomerResponse createCustomer(CreateCustomerRequest request) {
 
         // controllo email duplicata
         if (customerRepository.existsByEmail(request.getEmail())) {
