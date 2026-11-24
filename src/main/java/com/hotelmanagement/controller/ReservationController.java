@@ -1,11 +1,12 @@
 package com.hotelmanagement.controller;
 
-import com.hotelmanagement.dto.reservation.*;
-import com.hotelmanagement.service.ReservationService;
-
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import com.hotelmanagement.Service.ReservationService;
+import com.hotelmanagement.dto.CreateReservationRequest;
+import com.hotelmanagement.dto.ReservationResponse;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class ReservationController {
         return reservationService.checkOut(id);
     }
 
-     @PostMapping("/create")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public ReservationResponse createReservation(
             @Valid @RequestBody CreateReservationRequest request) {

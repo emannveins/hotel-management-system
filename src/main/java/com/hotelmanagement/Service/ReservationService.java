@@ -2,10 +2,24 @@ package com.hotelmanagement.Service;
 
 import java.math.BigDecimal;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.hotelmanagement.dto.CreateReservationRequest;
+import com.hotelmanagement.dto.ReservationResponse;
+import com.hotelmanagement.entity.CustomerEntity;
+import com.hotelmanagement.entity.ReservationEntity;
+import com.hotelmanagement.entity.RoomEntity;
+import com.hotelmanagement.enums.ReservationStatus;
+import com.hotelmanagement.enums.RoomStatus;
+import com.hotelmanagement.repository.CustomerRepository;
+import com.hotelmanagement.repository.ReservationRepository;
+import com.hotelmanagement.repository.RoomRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service 
 public class ReservationService {
@@ -24,11 +38,11 @@ public class ReservationService {
     public ReservationResponse createReservation( CreateReservationRequest request) {
 
         // controllo delle date
-        if (request.checkIn() == null ||  request.checkOut() == null ||!request.checkOut().isAfter(request.checkIn())) {
+        if (request.guests() <= 0) {
             throw new ResponseStatusException( HttpStatus.BAD_REQUEST, " date della prenotazione non sono valide");
         }
 
-        if (request.guests() == null || request.guests() <= 0) {
+        if (request.guests() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,  "Il numero di ospiti deve essere positivo");
         }
 
@@ -113,42 +127,75 @@ public class ReservationService {
     }
     
      // cancellazione prenotazione
-    @Transactional
-    public void cancelReservation(Long id) {
-        ReservationEntity reservation = reservationRepository.findById(id)
-                        .orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Prenotazione non trovata"));
 
-        if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Non è possibile cancellare questa prenotazione");
-        }
-        reservation.setStatus(ReservationStatus.CANCELLED);
-        reservationRepository.save(reservation);
+@Transactional
+public ReservationResponse cancelReservation(Long id) {
+
+    ReservationEntity reservation =
+            reservationRepository.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Prenotazione non trovata"
+                    ));
+
+    if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
+        throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "Non è possibile cancellare questa prenotazione"
+        );
     }
 
-    // check out
+    // Aggiornamento stato
+    reservation.setStatus(ReservationStatus.CANCELLED);
+
+    // Salvataggio
+    ReservationEntity updatedReservation =
+            reservationRepository.save(reservation);
+
+    // Restituzione DTO
+    return toResponse(updatedReservation);
+}
+
+    // check in
+    // CHECK-IN
     @Transactional
-    public void checkIn(Long id) {
-        ReservationEntity reservation = reservationRepository.findById(id)
-                        .orElseThrow(() -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Prenotazione non trovata"));
+    public ReservationResponse checkIn(Long id) {
+
+        ReservationEntity reservation =
+                reservationRepository.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Prenotazione non trovata"
+                        ));
 
         if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Impossibile effettuare il check-in");
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Impossibile effettuare il check-in"
+            );
         }
 
-        // aggiornamento stato prenotazione
+        // Aggiornamento stato prenotazione
         reservation.setStatus(ReservationStatus.CHECKED_IN);
 
-        // aggiornamento stato camera
+        // Aggiornamento stato camera
         RoomEntity room = reservation.getRoom();
         room.setStatus(RoomStatus.OCCUPIED);
+
+        // Salvataggio aggiornamenti
         roomRepository.save(room);
-        reservationRepository.save(reservation);
+
+        ReservationEntity updatedReservation =
+                reservationRepository.save(reservation);
+
+        // Restituzione DTO
+        return toResponse(updatedReservation);
     }
 
 
-    // check-in
+    // check-out
     @Transactional
-    public void checkOut(Long id) {
+    public ReservationResponse checkOut(Long id) {
         ReservationEntity reservation =  reservationRepository.findById(id)
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Prenotazione non trovata"));
 
@@ -166,24 +213,31 @@ public class ReservationService {
         }
 
         roomRepository.save(room);
+
+        ReservationEntity updatedReservation =
         reservationRepository.save(reservation);
+
+        return toResponse(updatedReservation);
+
+       
     }
 
     // entity->dto
     private ReservationResponse toResponse(ReservationEntity reservation) {
 
-        return new ReservationResponse(
-                reservation.getId(),
-                reservation.getCheckIn(),
-                reservation.getCheckOut(),
-                reservation.getGuests(),
-                reservation.getTotalPrice(),
-                reservation.getStatus(),
-                reservation.getCustomer().getId(),
-                reservation.getRoom().getId()
-        );
-    }
-
+    return new ReservationResponse(
+        reservation.getId(),
+        reservation.getCustomer().getId(),
+        reservation.getRoom().getId(),
+        reservation.getRoom().getNumber(),
+        reservation.getCheckIn(),
+        reservation.getCheckOut(),
+        reservation.getGuests(),
+        reservation.getTotalPrice(),
+        reservation.getStatus().name()
+    );
+}
+    
 
  }
 

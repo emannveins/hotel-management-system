@@ -1,12 +1,25 @@
 
 package com.hotelmanagement.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-import com.hotelmanagement.enums.RoomStatus;
-import com.hotelmanagement.enums.RoomType;
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.hotelmanagement.enums.RoomStatus;
+import com.hotelmanagement.enums.RoomType;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "room")
@@ -40,4 +53,8 @@ public class RoomEntity {
 
     @OneToMany(mappedBy = "room")
     private List<ReservationEntity> reservations;
+
+    public BigDecimal getPricePerNight() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPricePerNight'");
+    }
 }

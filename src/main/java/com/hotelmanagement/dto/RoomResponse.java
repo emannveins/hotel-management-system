@@ -2,6 +2,8 @@ package com.hotelmanagement.dto;
 
 import java.math.BigDecimal;
 
+import com.hotelmanagement.enums.RoomType;
+
 public record RoomResponse(
     Long id,
     String number,

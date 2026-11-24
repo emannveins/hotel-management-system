@@ -1,10 +1,21 @@
+
 package com.hotelmanagement.repository;
 
+import java.time.LocalDate;
 
-import com.hotelmanagement.entity.ReservationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
+import com.hotelmanagement.entity.ReservationEntity;
+import com.hotelmanagement.enums.ReservationStatus;
 
+public interface ReservationRepository
+        extends JpaRepository<ReservationEntity, Long> {
+
+    boolean existsByRoom_IdAndStatusNotAndCheckInBeforeAndCheckOutAfter(
+            Long roomId,
+            ReservationStatus status,
+            LocalDate checkIn,
+            LocalDate checkOut
+    );
 }
 
