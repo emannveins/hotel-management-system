@@ -55,6 +55,8 @@ public class RoomEntity {
     private List<ReservationEntity> reservations;
 
     public BigDecimal getPricePerNight() {
+        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPricePerNight'");
     }
+
 }

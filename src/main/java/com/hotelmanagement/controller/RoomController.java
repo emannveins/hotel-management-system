@@ -1,11 +1,15 @@
 package com.hotelmanagement.controller;
 
-import com.hotelmanagement.dto.room.*;
-import com.hotelmanagement.service.RoomService;
+
 
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import com.hotelmanagement.Service.RoomService;
+import com.hotelmanagement.dto.CreateRoomRequest;
+import com.hotelmanagement.dto.RoomResponse;
+import com.hotelmanagement.enums.RoomType;
 
 import java.time.LocalDate;
 import java.util.List;
