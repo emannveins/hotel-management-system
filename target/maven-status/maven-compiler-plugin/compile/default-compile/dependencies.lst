@@ -4,6 +4,8 @@ classpath:/home/emann/.m2/repository/org/springframework/spring-core/7.1.0/sprin
 classpath:/home/emann/.m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar	75828:1781210967000
 classpath:/home/emann/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar	3064:1785364862000
 classpath:/home/emann/.m2/repository/org/springframework/spring-context/7.1.0/spring-context-7.1.0.jar	1409159:1795096516000
+classpath:/home/emann/.m2/repository/org/springframework/spring-aop/7.1.0/spring-aop-7.1.0.jar	429580:1795096516000
+classpath:/home/emann/.m2/repository/org/springframework/spring-beans/7.1.0/spring-beans-7.1.0.jar	951681:1795096516000
 classpath:/home/emann/.m2/repository/org/springframework/spring-expression/7.1.0/spring-expression-7.1.0.jar	332838:1795096516000
 classpath:/home/emann/.m2/repository/io/micrometer/micrometer-observation/1.18.0/micrometer-observation-1.18.0.jar	83848:1795094722000
 classpath:/home/emann/.m2/repository/io/micrometer/micrometer-commons/1.18.0/micrometer-commons-1.18.0.jar	51335:1795094722000
@@ -58,14 +60,6 @@ classpath:/home/emann/.m2/repository/org/hibernate/validator/hibernate-validator
 classpath:/home/emann/.m2/repository/jakarta/validation/jakarta.validation-api/3.1.1/jakarta.validation-api-3.1.1.jar	106136:1738452882000
 classpath:/home/emann/.m2/repository/org/jboss/logging/jboss-logging/3.6.3.Final/jboss-logging-3.6.3.Final.jar	62672:1773769105000
 classpath:/home/emann/.m2/repository/com/fasterxml/classmate/1.8.0/classmate-1.8.0.jar	77322:1791689812000
-classpath:/home/emann/.m2/repository/org/springframework/boot/spring-boot-starter-security/4.2.0/spring-boot-starter-security-4.2.0.jar	4740:1795110960000
-classpath:/home/emann/.m2/repository/org/springframework/boot/spring-boot-security/4.2.0/spring-boot-security-4.2.0.jar	102943:1795110951000
-classpath:/home/emann/.m2/repository/org/springframework/security/spring-security-config/7.2.0/spring-security-config-7.2.0.jar	2188308:1795101732000
-classpath:/home/emann/.m2/repository/org/springframework/security/spring-security-core/7.2.0/spring-security-core-7.2.0.jar	642926:1795101732000
-classpath:/home/emann/.m2/repository/org/springframework/security/spring-security-crypto/7.2.0/spring-security-crypto-7.2.0.jar	118834:1795101731000
-classpath:/home/emann/.m2/repository/org/springframework/security/spring-security-web/7.2.0/spring-security-web-7.2.0.jar	941847:1795101733000
-classpath:/home/emann/.m2/repository/org/springframework/spring-aop/7.1.0/spring-aop-7.1.0.jar	429580:1795096516000
-classpath:/home/emann/.m2/repository/org/springframework/spring-beans/7.1.0/spring-beans-7.1.0.jar	951681:1795096516000
 classpath:/home/emann/.m2/repository/org/springframework/boot/spring-boot-starter-webmvc/4.2.0/spring-boot-starter-webmvc-4.2.0.jar	4747:1795110961000
 classpath:/home/emann/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/4.2.0/spring-boot-starter-tomcat-4.2.0.jar	4763:1795110960000
 classpath:/home/emann/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat-runtime/4.2.0/spring-boot-starter-tomcat-runtime-4.2.0.jar	4743:1795110960000

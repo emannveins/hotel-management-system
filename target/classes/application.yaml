@@ -1,42 +1,12 @@
-server:
-  port: 8082
-
 spring:
-  ai:
-    vectorstore:
-      pgvector:
-        dimensions: 768
-        initialize-schema: true
-    model:
-      embedding: ollama
-
-    openai:
-      # Reindirizza le chiamate API verso gli endpoint di Groq
-      base-url: https://api.groq.com/openai
-
-      # Recupera la chiave API dalle variabili d'ambiente per motivi di sicurezza
-      api-key: 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
-
-      chat:
-        base-url: https://api.groq.com/openai
-        options:
-          # Specifica il modello Groq che desideri utilizzare
-          model: openai/gpt-oss-120b
-
-    ollama:
-      base-url: http://localhost:11434
-      embedding:
-        options:
-          model: nomic-embed-text
+  application:
+    name: hotel_management
 
   datasource:
-    url: jdbc:mysql://localhost:3306/concessionari_db
-    username: root
-    password: Mariano_7
-    #url: jdbc:postgresql://localhost:5433/concessionari_db
-    #username: root
-    #password: Mariano_7
-    #driver-class-name: org.postgresql.Driver
+    url: jdbc:mariadb://localhost:3306/hotel_management
+    username: emanuele
+    password: emanuele7
+    driver-class-name: org.mariadb.jdbc.Driver
 
   jpa:
     hibernate:
@@ -45,6 +15,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false
 
-product-service.url: http://localhost:8081/store
-
+server:
+  port: 8080

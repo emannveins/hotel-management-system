@@ -54,9 +54,6 @@ public class RoomEntity {
     @OneToMany(mappedBy = "room")
     private List<ReservationEntity> reservations;
 
-    public BigDecimal getPricePerNight() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPricePerNight'");
-    }
+   
 
 }

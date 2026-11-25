@@ -1,9 +1,9 @@
-obbiettivo generale
+obbiettivo generale:
 
-realizzare un sistema backend REST per la gestione di un hotel rinomato con possibile frontend
+realizzare un sistema backend REST per la gestione di un hotel rinomato 
 Il sistema permette di amministrare camere, clienti e prenotazioni, verificando la disponibilità delle camere.
 
-obbiettivi del progetto entro mercoledi (provvisoria):
+obbiettivi del progetto entro mercoledi:
 
 1. Gestire i clienti: registrare clienti, visualizzarli e cercarli.
 2. Gestire le camere: inserire camere, specificare tipologia, prezzo e stato.
@@ -13,7 +13,7 @@ obbiettivi del progetto entro mercoledi (provvisoria):
 6. Gestire check-in e check-out: registrare l'arrivo e la partenza degli ospiti.
 
 
-divisione dei compiti (provvisoria)
+divisione dei compiti 
 
 layer API
 marco

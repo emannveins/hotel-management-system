@@ -110,6 +110,7 @@ public class RoomService {
         room.setType(request.type());
         room.setNightlyRate(request.nightlyRate());
         room.setStatus(RoomStatus.AVAILABLE);
+        room.setCapacity(request.capacity());
         RoomEntity savedRoom = roomRepository.save(room);
         return toResponse(savedRoom);
     }

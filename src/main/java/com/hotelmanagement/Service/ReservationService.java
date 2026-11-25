@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.hotelmanagement.dto.CreateReservationRequest;
@@ -18,8 +19,6 @@ import com.hotelmanagement.enums.RoomStatus;
 import com.hotelmanagement.repository.CustomerRepository;
 import com.hotelmanagement.repository.ReservationRepository;
 import com.hotelmanagement.repository.RoomRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service 
 public class ReservationService {
@@ -84,9 +83,8 @@ public class ReservationService {
         );
 
         // calcolo prezzo totale
-        BigDecimal totalPrice = room.getPricePerNight()
-                .multiply(BigDecimal.valueOf(nights));
-
+       BigDecimal totalPrice = room.getNightlyRate()
+        .multiply(BigDecimal.valueOf(nights));
         // creazione prenotazione
         ReservationEntity reservation = new ReservationEntity();
 
@@ -106,15 +104,32 @@ public class ReservationService {
     }
 
     // recupero tutte prenotazioni
-    public List<ReservationResponse> getAllReservations() {
+    @Transactional(readOnly = true)
+        public List<ReservationResponse> getAllReservations() {
+
         return reservationRepository.findAll()
-                .stream()
-                .map(this::toResponse)
-                .toList();
-    }
+            .stream()
+            .map(this::toResponse)
+            .toList();
+        }
 
      // ricerca per id
-    public ReservationResponse getReservationById(Long id) {
+   @Transactional(readOnly = true)
+        public ReservationResponse getReservationById(Long id) {
+
+        ReservationEntity reservation =
+            reservationRepository.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Prenotazione non trovata"
+                    ));
+
+        return toResponse(reservation);
+        }
+    
+     // cancellazione prenotazione
+        @Transactional
+        public ReservationResponse cancelReservation(Long id) {
 
         ReservationEntity reservation =
                 reservationRepository.findById(id)
@@ -123,27 +138,12 @@ public class ReservationService {
                                 "Prenotazione non trovata"
                         ));
 
-        return toResponse(reservation);
-    }
-    
-     // cancellazione prenotazione
-
-@Transactional
-public ReservationResponse cancelReservation(Long id) {
-
-    ReservationEntity reservation =
-            reservationRepository.findById(id)
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Prenotazione non trovata"
-                    ));
-
-    if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
-        throw new ResponseStatusException(
-                HttpStatus.CONFLICT,
-                "Non è possibile cancellare questa prenotazione"
-        );
-    }
+        if (reservation.getStatus() != ReservationStatus.CONFIRMED) {
+                throw new ResponseStatusException(
+                        HttpStatus.CONFLICT,
+                        "Non è possibile cancellare questa prenotazione"
+                );
+        }
 
     // Aggiornamento stato
     reservation.setStatus(ReservationStatus.CANCELLED);
